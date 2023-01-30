@@ -1,9 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import baseUrl, { host } from '../../utils/APIRoutes'
+import { host } from '../../utils/APIRoutes'
 import useAuth from '../../hooks/useAuth'
 import './AuthForm.css'
 import { toast } from 'react-hot-toast'
+import axios from 'axios'
 
 
 const Login = () => {
@@ -46,10 +47,12 @@ const Login = () => {
       try {
         const { email, password } = values
 
-        const { res } = await baseUrl.post(`/api/auth/login`, {
+        const res = await axios.post(`${host}/api/auth/login`, {
           email,
           password
         })
+
+        console.log(res)
 
         await verifyAuth()
         navigate('/')

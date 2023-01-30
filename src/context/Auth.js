@@ -2,11 +2,11 @@ import axios from "axios";
 import { useEffect, useState, createContext } from "react";
 import { host } from "../utils/APIRoutes";
 
-const AuthContext = createContext()
+const AuthContext = createContext({})
 
 export const AuthProvider = ({ children }) => {
   
-    const [ auth, setAuth ] = useState('')
+    const [ auth, setAuth ] = useState(undefined)
 
     const verifyAuth = async () => {
       const isLoggedIn = await axios.get(`${host}/api/auth/is_logged_in`)
